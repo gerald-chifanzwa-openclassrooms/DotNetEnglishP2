@@ -12,6 +12,7 @@ namespace P2FixAnAppDotNetCode.Models.Repositories
 
         public ProductRepository()
         {
+            //Initialize _products only if it has not been initialized before
             if (_products == null)
             {
                 _products = new List<Product>();

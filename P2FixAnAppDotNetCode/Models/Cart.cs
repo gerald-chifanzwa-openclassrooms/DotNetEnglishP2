@@ -73,6 +73,7 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>
         public Product FindProductInCartLines(int productId)
         {
+            // Find cart line whose product id matches productId. If found, return the product.
             CartLine cartLine = _cartLines.FirstOrDefault(line => line.Product.Id == productId);
             return cartLine != null ?
                 cartLine.Product :

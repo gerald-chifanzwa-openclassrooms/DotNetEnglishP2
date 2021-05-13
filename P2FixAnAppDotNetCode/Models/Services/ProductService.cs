@@ -32,8 +32,9 @@ namespace P2FixAnAppDotNetCode.Models.Services
         /// </summary>
         public Product GetProductById(int id)
         {
-            var product = _productRepository.GetAllProducts()
-                                            .FirstOrDefault(p => p.Id == id);
+            // Find product with thw given Id in products
+            var products = _productRepository.GetAllProducts();
+            var product = products.FirstOrDefault(p => p.Id == id);
             return product;
         }
 
@@ -42,7 +43,7 @@ namespace P2FixAnAppDotNetCode.Models.Services
         /// </summary>
         public void UpdateProductQuantities(Cart cart)
         {
-            foreach(CartLine line in cart.Lines)
+            foreach (CartLine line in cart.Lines)
             {
                 _productRepository.UpdateProductStocks(line.Product.Id, line.Quantity);
             }
