@@ -11,7 +11,7 @@ namespace P2FixAnAppDotNetCode.Models
         private readonly List<CartLine> _cartLines = new List<CartLine>();
 
         /// <summary>
-        /// Read-only property for dispaly only
+        /// Read-only property for display only
         /// </summary>
         public IEnumerable<CartLine> Lines => GetCartLineList();
 
@@ -37,17 +37,18 @@ namespace P2FixAnAppDotNetCode.Models
                 return;
             }
 
-            cartLine = new CartLine();
-            cartLine.Product = product;
-            cartLine.Quantity = quantity;
+            cartLine = new CartLine
+            {
+                Product = product,
+                Quantity = quantity
+            };
             _cartLines.Add(cartLine);
         }
 
         /// <summary>
         /// Removes a product form the cart
         /// </summary>
-        public void RemoveLine(Product product) =>
-            GetCartLineList().RemoveAll(l => l.Product.Id == product.Id);
+        public void RemoveLine(Product product) => _cartLines.RemoveAll(l => l.Product.Id == product.Id);
 
         /// <summary>
         /// Get total value of a cart
@@ -75,9 +76,7 @@ namespace P2FixAnAppDotNetCode.Models
         {
             // Find cart line whose product id matches productId. If found, return the product.
             CartLine cartLine = _cartLines.FirstOrDefault(line => line.Product.Id == productId);
-            return cartLine != null ?
-                cartLine.Product :
-                null;
+            return cartLine?.Product;
         }
 
         /// <summary>
